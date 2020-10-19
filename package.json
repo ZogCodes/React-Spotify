@@ -1,0 +1,70 @@
+{
+  "name": "react-boilerplate",
+  "version": "0.9.1",
+  "description": "Simple boilerplate for React with Jest support",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/webpack/bin/webpack.js --mode development",
+    "build": "./node_modules/webpack/bin/webpack.js --mode production",
+    "start:watch": "./node_modules/webpack/bin/webpack.js --mode development --watch",
+    "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js  --mode development",
+    "test": "./node_modules/jest/bin/jest.js --env=jsdom",
+    "test:watch": "./node_modules/jest/bin/jest.js --watch --env=jsdom --verbose",
+    "test:watch:log": "TERM=dumb ./node_modules/jest/bin/jest.js --watch --env=jsdom --verbose",
+    "coverage": "npm test -- --coverage",
+    "eslint": "eslint ./src",
+    "profile": "./node_modules/webpack/bin/webpack.js --profile --json > stats.json",
+    "profile:analyze": "./node_modules/.bin/webpack-bundle-analyzer ./stats.json"
+  },
+  "keywords": [
+    "react"
+  ],
+  "homepage": "https://github.com/darkmavis1980/react-jest-boilerplate",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darkmavis1980/react-jest-boilerplate.git"
+  },
+  "author": "Alessio Michelini",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^4.3.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.4",
+    "enzyme-to-json": "^3.5.0",
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-react": "^7.20.6",
+    "html-webpack-plugin": "^4.4.1",
+    "jest": "^26.4.2",
+    "jest-cli": "^26.4.2",
+    "jest-environment-jsdom": "^26.3.0",
+    "jest-transform-stub": "^2.0.0",
+    "mini-css-extract-plugin": "^0.10.1",
+    "react-test-renderer": "^16.13.1",
+    "redux-mock-store": "^1.5.4",
+    "sass": "^1.26.10",
+    "sass-loader": "^10.0.2",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.1",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "prop-types": "^15.7.2",
+    "query-string": "^6.13.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0"
+  }
+}
