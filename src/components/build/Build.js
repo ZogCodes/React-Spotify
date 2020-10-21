@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import Playlist from "./components/Playlist";
+import Tuner from "./components/Tuner";
 
 function Build(props) {
   const [activeTrack, setTrack] = useState('');
   const [activeIndex, setIndex] = useState(0);
+  const [tunings, setTunings] = useState({ market: "from_token"});
 
   useEffect(() => {
     const parameters = "limit=40";
@@ -44,6 +46,7 @@ function Build(props) {
           <button onClick={() => nextTrack()}>Next Track</button>
           <button onClick={() => addToPlaylist()}>Add to playlist</button>
           <Playlist playlist={props.playlist} />
+          <Tuner setTunings={setTunings} tunings={tunings}/>
         </>
         : ''}
     </>
