@@ -21,7 +21,7 @@ function Tuner(props) {
       setActiveTunes(newTunes);
       const newTunings = Object.keys(props.tunings).reduce((object, key) => {
         if (key !== event.target.name) {
-          object[key] = props.tunings[key]
+          object[key] = props.tunings[key];
         }
         return object;
       }, {});

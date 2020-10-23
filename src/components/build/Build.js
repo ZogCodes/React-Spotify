@@ -5,13 +5,13 @@ import Tuner from "./components/Tuner";
 function Build(props) {
   const [activeTrack, setTrack] = useState('');
   const [activeIndex, setIndex] = useState(0);
-  const [tunings, setTunings] = useState({ market: "from_token"});
+  const [tunings, setTunings] = useState({market: 'from_token'});
 
   useEffect(() => {
     const parameters = "limit=40";
-    const spotifyURL = `https://api.spotify.com/v1/me/top/tracks?${parameters}`;
+    const tracksURL = `https://api.spotify.com/v1/me/top/tracks?${parameters}`;
     const getTrack = async () => {
-      const res = await fetch(spotifyURL, {
+      const res = await fetch(tracksURL, {
         headers: {
           Authorization: `Bearer ${props.accessToken}`
         },
@@ -28,8 +28,22 @@ function Build(props) {
 
   const addToPlaylist = () => {
     props.setPlaylist([activeTrack, ...props.playlist]);
-    console.log(activeTrack);
-    console.log(props.playlist);
+    props.playlist.length == 0 ? setTunings({ ...tunings, 'seed_tracks': activeTrack.id, 'seed_artists':activeTrack.artists[0].id }) : '';
+  };
+
+  const getRecommendations = async () => {
+    const tuningsEntries = Object.entries(tunings);
+    const queryParams = tuningsEntries.join("&").replace(/,/g, '=');
+    const recommendationsURL = `https://api.spotify.com/v1/recommendations?${queryParams}`;
+    const res = await fetch(recommendationsURL, {
+      headers: {
+        Authorization: `Bearer ${props.accessToken}`
+      },
+    });
+    const json = await res.json();
+    let index = 0;
+    props.playlist.indexOf(json.tracks[index]) !== -1 ? index + 1 : '';
+    setTrack(json.tracks[index]);
   };
 
   return (
@@ -46,7 +60,12 @@ function Build(props) {
           <button onClick={() => nextTrack()}>Next Track</button>
           <button onClick={() => addToPlaylist()}>Add to playlist</button>
           <Playlist playlist={props.playlist} />
-          <Tuner setTunings={setTunings} tunings={tunings}/>
+          {props.playlist.length > 0 ?
+            <>
+              <Tuner setTunings={setTunings} tunings={tunings}/>
+              <button onClick={() => getRecommendations()}>Get Recs</button>
+            </>
+            : '' }
         </>
         : ''}
     </>
