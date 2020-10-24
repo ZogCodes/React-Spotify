@@ -5,7 +5,7 @@ function Auth() {
   console.log(process.env.redirectURI)
   return (
     <>
-      <a href={`${process.env.baseURL}?client_id=${process.env.clientID}&response_type=${process.env.responseType}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(process.env.redirectURI)}`}>
+      <a href={`${process.env.REACT_APP_baseURL}?client_id=${process.env.REACT_APP_clientID}&response_type=${process.env.REACT_APP_responseType}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(process.env.REACT_APP_redirectURI)}`}>
         Auth
       </a>
     </>
