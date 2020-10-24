@@ -1,5 +1,4 @@
 import React from 'react';
-import config from '../../../config';
 
 function Auth() {
   const scopes = "user-top-read playlist-modify-public streaming";
