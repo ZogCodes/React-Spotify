@@ -2,9 +2,11 @@ import React from 'react';
 import config from '../../../config';
 
 function Auth() {
+  const scopes = "user-top-read playlist-modify-public streaming";
+  console.log(process.env.redirectURI)
   return (
     <>
-      <a href={`${config.baseURL}?client_id=${config.clientID}&response_type=${config.responseType}&scope=${encodeURIComponent(config.scopes)}&redirect_uri=${encodeURIComponent(config.redirectURI)}`}>
+      <a href={`${process.env.baseURL}?client_id=${process.env.clientID}&response_type=${process.env.responseType}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(process.env.redirectURI)}`}>
         Auth
       </a>
     </>
