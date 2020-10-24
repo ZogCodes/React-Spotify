@@ -4,10 +4,10 @@
   "description": "Simple boilerplate for React with Jest support",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/webpack/bin/webpack.js --mode development",
+    "start": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --mode development",
     "build": "./node_modules/webpack/bin/webpack.js --mode production",
     "start:watch": "./node_modules/webpack/bin/webpack.js --mode development --watch",
-    "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js  --mode development",
+    "dev": "NODE_ENV=development ./node_modules/webpack-dev-server/bin/webpack-dev-server.js  --mode development",
     "test": "./node_modules/jest/bin/jest.js --env=jsdom",
     "test:watch": "./node_modules/jest/bin/jest.js --watch --env=jsdom --verbose",
     "test:watch:log": "TERM=dumb ./node_modules/jest/bin/jest.js --watch --env=jsdom --verbose",
