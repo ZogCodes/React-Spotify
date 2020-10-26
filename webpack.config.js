@@ -79,6 +79,11 @@ module.exports = {
       chunks: ["vendor", "app"],
       template: path.join(__dirname, "public", "index.html")
     }),
+    new HtmlWebpackPlugin({
+      filename: "_redirects",
+      chunks: ["vendor", "app"],
+      template: path.join(__dirname, "public", "_redirects")
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
