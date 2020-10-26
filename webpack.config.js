@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const Dotenv = require('dotenv-webpack');
@@ -79,10 +80,10 @@ module.exports = {
       chunks: ["vendor", "app"],
       template: path.join(__dirname, "public", "index.html")
     }),
-    new HtmlWebpackPlugin({
-      filename: "_redirects",
-      chunks: ["vendor", "app"],
-      template: path.join(__dirname, "public", "_redirects")
+    new CopyPlugin({
+      patterns: [
+        { from: './public/_redirects'},
+      ],
     }),
     new webpack.DefinePlugin({
       'process.env': {
