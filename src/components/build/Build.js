@@ -4,8 +4,10 @@ import Tuner from "./components/Tuner";
 
 function Build(props) {
   const [activeTrack, setTrack] = useState('');
+  const [myTracks, setMyTracks] = useState('');
   const [activeIndex, setIndex] = useState(0);
   const [tunings, setTunings] = useState({market: 'from_token'});
+  const [recTracks, setRecTracks] = useState('');
 
   useEffect(() => {
     const parameters = "limit=40";
@@ -17,13 +19,15 @@ function Build(props) {
         },
       });
       const json = await res.json();
-      setTrack(json.items[activeIndex]);
+      setTrack(json.items[0]);
+      setMyTracks(json.items);
     };
     getTrack();
-  }, [activeIndex, props.accessToken]);
+  }, [props.accessToken]);
 
   const nextTrack = () => {
     setIndex(prevIndex => prevIndex + 1);
+    recTracks.length > 0 ? setTrack(recTracks[activeIndex + 1]) : setTrack(myTracks[activeIndex + 1]);
   };
 
   const addToPlaylist = () => {
@@ -32,6 +36,7 @@ function Build(props) {
   };
 
   const getRecommendations = async () => {
+    setIndex(0);
     const tuningsEntries = Object.entries(tunings);
     const queryParams = tuningsEntries.join("&").replace(/,/g, '=');
     const recommendationsURL = `https://api.spotify.com/v1/recommendations?${queryParams}`;
@@ -41,21 +46,19 @@ function Build(props) {
       },
     });
     const json = await res.json();
-    let index = 0;
-    props.playlist.indexOf(json.tracks[index]) !== -1 ? index + 1 : '';
-    setTrack(json.tracks[index]);
+    setTrack(json.tracks[0]);
+    setRecTracks(json.tracks);
   };
 
   return (
-    <>
-      <p>Builder</p>
+    <section>
       {(activeTrack)
         ? <>
           <p>{activeTrack.name}</p>
           <p>{activeTrack.artists[0].name}</p>
-          <audio controls>
+          {/* <audio controls>
             <source src={activeTrack.preview_url} type="audio/ogg" />
-          </audio>
+          </audio> */}
 
           <button onClick={() => nextTrack()}>Next Track</button>
           <button onClick={() => addToPlaylist()}>Add to playlist</button>
@@ -68,7 +71,17 @@ function Build(props) {
             : '' }
         </>
         : ''}
-    </>
+      <div>
+        In dev instructions...
+        <ol>
+          <li>The first tracks you'll see are recommended based on your spotify listener data.
+            Click "Next Track" until you find a track you like, and then click "Add to Playlist".</li>
+          <li>Check music attributes on and off to tune for songs- 
+            moving a slider to the left puts the value super low, and to the right puts it super high.</li>
+          <li>Click "Get Recs" to find new songs.</li>
+        </ol>
+      </div>
+    </section>
   );
 }
 export default Build;

@@ -21,12 +21,11 @@ export default function App() {
 
   return (
     <div className="app">
-      <div className="app-body">
-        <div className="main-content">
-          <Route exact path="/" component={Auth} />
-          <Route path="/build" render={routerProps => <Build {...routerProps} accessToken={accessToken} playlist={playlist} setPlaylist={setPlaylist}/>}/>
-          <Route path="/export" render={routerProps => <Export {...routerProps} accessToken={accessToken} playlist={playlist}/>}/>
-        </div>
+      <div className="main-content">
+        <header>Spotify Playlist Builder</header>
+        <Route exact path="/" component={Auth} />
+        <Route path="/build" render={routerProps => <Build {...routerProps} accessToken={accessToken} playlist={playlist} setPlaylist={setPlaylist}/>}/>
+        <Route path="/export" render={routerProps => <Export {...routerProps} accessToken={accessToken} playlist={playlist}/>}/>
       </div>
     </div>
   );
