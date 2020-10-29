@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Playlist from "./components/Playlist";
 import Tuner from "./components/Tuner";
+import Player from "./components/Player";
 
 function Build(props) {
   const [activeTrack, setTrack] = useState('');
@@ -54,13 +55,11 @@ function Build(props) {
     <section>
       {(activeTrack)
         ? <>
-          <p>{activeTrack.name}</p>
-          <p>{activeTrack.artists[0].name}</p>
+          <Player activeTrack={activeTrack} nextTrack={nextTrack}/>
           {/* <audio controls>
             <source src={activeTrack.preview_url} type="audio/ogg" />
           </audio> */}
 
-          <button onClick={() => nextTrack()}>Next Track</button>
           <button onClick={() => addToPlaylist()}>Add to playlist</button>
           <Playlist playlist={props.playlist} />
           {props.playlist.length > 0 ?
