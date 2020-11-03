@@ -1,5 +1,6 @@
 const vars = {
   normalPadding: '25px',
+  smallPadding: '15px 25px',
   color1: '#000',
   color2: '#292626',
   color3: '#545454',

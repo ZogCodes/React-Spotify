@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Export() {
-  return (<p>Export</p>);
+function Export(props) {
+  return (<section>Export</section>);
 }
 
-export default Export();
+export default Export;

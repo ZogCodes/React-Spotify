@@ -19,13 +19,14 @@
 
 .main-content {
   position: relative;
-  overflow-y: scroll;
   min-height: 100%;
   flex:1;
   background-color: $color3;
-  width: 1500px;
+  max-width: 1500px;
+  width: 100%;
   margin: 0 auto;
   color: $color7;
+  height: 100vh;
 
   header {
     background-color: $color6;
@@ -37,6 +38,12 @@
   }
 
   section {
-    padding: $normalPadding;
+    display: grid;
+    grid-template: 1fr 1.5fr/1fr 2fr;
+    height: calc(100vh - 167px);
+
+    .full {
+      grid-area: 1/1/3/3;
+    }
   }
 }

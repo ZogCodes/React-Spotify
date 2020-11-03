@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState } from 'react';
 import Playlist from "./components/Playlist";
 import Tuner from "./components/Tuner";
 import Player from "./components/Player";
+import handleInstructions from "./components/handleInstructions";
 
 function Build(props) {
   const [activeTrack, setTrack] = useState('');
@@ -26,14 +27,39 @@ function Build(props) {
     getTrack();
   }, [props.accessToken]);
 
-  const nextTrack = () => {
-    setIndex(prevIndex => prevIndex + 1);
-    recTracks.length > 0 ? setTrack(recTracks[activeIndex + 1]) : setTrack(myTracks[activeIndex + 1]);
+  const nextTrack = action => {
+    let newIndex = '';
+    switch (action) {
+    case 'NEXT':
+      setIndex(prevIndex => prevIndex + 1);
+      if (recTracks.length > 0) {
+        setTrack(recTracks[activeIndex + 1]);
+      } else {
+        setTrack(myTracks[activeIndex + 1]);
+      }
+      break;
+    case 'PREV':
+      if (activeIndex === 0) {
+        newIndex = 20;
+      } else {
+        newIndex = activeIndex - 1;
+      }
+      setIndex(newIndex);
+      if (recTracks.length > 0) {
+        setTrack(recTracks[newIndex]);
+      } else {
+        setTrack(myTracks[newIndex]);
+      }
+      break;
+    default:
+    }
   };
 
   const addToPlaylist = () => {
     props.setPlaylist([activeTrack, ...props.playlist]);
-    props.playlist.length == 0 ? setTunings({ ...tunings, 'seed_tracks': activeTrack.id, 'seed_artists':activeTrack.artists[0].id }) : '';
+    if (props.playlist.length === 0) {
+      setTunings({ ...tunings, seed_tracks: activeTrack.id, seed_artists: activeTrack.artists[0].id });
+    }
   };
 
   const getRecommendations = async () => {
@@ -52,35 +78,30 @@ function Build(props) {
   };
 
   return (
-    <section>
-      {(activeTrack)
-        ? <>
-          <Player activeTrack={activeTrack} nextTrack={nextTrack}/>
-          {/* <audio controls>
-            <source src={activeTrack.preview_url} type="audio/ogg" />
-          </audio> */}
-
-          <button onClick={() => addToPlaylist()}>Add to playlist</button>
-          <Playlist playlist={props.playlist} />
-          {props.playlist.length > 0 ?
-            <>
-              <Tuner setTunings={setTunings} tunings={tunings}/>
-              <button onClick={() => getRecommendations()}>Get Recs</button>
-            </>
-            : '' }
-        </>
-        : ''}
-      <div>
-        In dev instructions...
-        <ol>
-          <li>The first tracks you'll see are recommended based on your spotify listener data.
-            Click "Next Track" until you find a track you like, and then click "Add to Playlist".</li>
-          <li>Check music attributes on and off to tune for songs- 
-            moving a slider to the left puts the value super low, and to the right puts it super high.</li>
-          <li>Click "Get Recs" to find new songs.</li>
-        </ol>
-      </div>
-    </section>
+    <>
+      {handleInstructions(props.playlist)}
+      <section>
+        {(activeTrack)
+          ? <>
+            {props.playlist.length > 0
+              ? <>
+                <Tuner setTunings={setTunings} tunings={tunings} getRecommendations={getRecommendations}/>
+              </>
+              : '' }
+            <div className={props.playlist.length === 0 ? "full" : ''}>
+              <Player activeTrack={activeTrack} nextTrack={nextTrack} addToPlaylist={addToPlaylist} />
+            </div>
+            {props.playlist.length > 0
+              ? <>
+                <Playlist playlist={props.playlist} name={props.name} setName={props.setName} />
+              </>
+              : '' }
+          </>
+          : '' }
+        <div>
+        </div>
+      </section>
+    </>
   );
 }
 export default Build;

@@ -10,6 +10,7 @@ import Export from "./export/Export";
 export default function App() {
   const [accessToken, setAccessToken] = useState('');
   const [playlist, setPlaylist] = useState([]);
+  const [name, setName] = useState('');
 
   useEffect(() => {
     if (window.location.href.includes('access_token')) {
@@ -24,8 +25,8 @@ export default function App() {
       <div className="main-content">
         <header>Spotify Playlist Builder</header>
         <Route exact path="/" component={Auth} />
-        <Route path="/build" render={routerProps => <Build {...routerProps} accessToken={accessToken} playlist={playlist} setPlaylist={setPlaylist}/>}/>
-        <Route path="/export" render={routerProps => <Export {...routerProps} accessToken={accessToken} playlist={playlist}/>}/>
+        <Route path="/build" render={routerProps => <Build {...routerProps} accessToken={accessToken} playlist={playlist} setPlaylist={setPlaylist} name={name} setName={setName}/>}/>
+        <Route path="/export" render={routerProps => <Export {...routerProps} accessToken={accessToken} playlist={playlist} name={name}/>}/>
       </div>
     </div>
   );
