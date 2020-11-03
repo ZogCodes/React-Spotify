@@ -1,4 +1,3 @@
-import { parseSync } from "@babel/core";
 import React, { useRef, useState, useEffect } from "react";
 import styled from 'styled-components';
 import vars from '../../../styles/vars';
