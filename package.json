@@ -61,6 +61,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "fs": "0.0.1-security",
     "node-fetch": "^2.6.1",
     "prop-types": "^15.7.2",
