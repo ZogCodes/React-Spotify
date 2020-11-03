@@ -21,6 +21,7 @@ const StyledPlaylist = styled.div`
       color: ${vars.color7};
       font-family: inherit;
       font-size: 16px;
+      width: 500px;
 
       &:focus {
         border: 1px solid ${vars.color1};
