@@ -2,6 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import vars from '../../../styles/vars';
 import Button from './Button';
+import { Link } from "react-router-dom";
 
 const StyledPlaylist = styled.div`
   position: relative;
@@ -9,24 +10,27 @@ const StyledPlaylist = styled.div`
   .name {
     position: absolute;
     top: 0;
-    background: ${vars.color1};
+    background: ${vars.color2};
     padding: 15px 25px 5px;
     width: 100%;
 
     input[name="playlist-name"] {
       margin-left: 1rem;
-      background-color: ${vars.color1};
+      background-color: ${vars.color2};
       appearance: none;
       border: none;
       color: ${vars.color7};
       font-family: inherit;
       font-size: 16px;
-      width: 500px;
+      width: 300px;
 
       &:focus {
         border: 1px solid ${vars.color1};
         outline: none;
         padding: 1rem;
+      }
+      &:-internal-autofill-selected {
+        background-color: ${vars.color2};
       }
     }
   }
@@ -46,10 +50,10 @@ const StyledPlaylist = styled.div`
       grid-template-columns: 1fr 1fr 1fr;
 
       &:nth-child(odd) {
-        background-color: ${vars.color4};
+        background-color: ${vars.color2};
       }
       &.key {
-        background-color: ${vars.color1};
+        background-color: ${vars.color2};
         text-transform: uppercase;
         font-size: 12px;
         padding: 5px 25px 10px;
@@ -90,9 +94,9 @@ function Playlist(props) {
         {songs}
       </ul>
       {props.playlist.length >= 5
-        ? <a href="/export">
+        ? <Link to="/export">
           <Button text="Export" extraClasses="export" />
-        </a>
+        </Link>
         : ''}
     </StyledPlaylist>);
 }

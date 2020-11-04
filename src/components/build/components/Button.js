@@ -5,7 +5,7 @@ import vars from '../../../styles/vars';
 const StyledButton = styled.button`
   -webkit-appearance: none;
   padding: 10px 20px;
-  background-color: ${vars.color7};
+  background-color: ${vars.color6};
   border-radius: 50px;
   color: ${vars.color1};
   text-transform: uppercase;
@@ -22,13 +22,13 @@ const StyledButton = styled.button`
 
   &:hover{
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out;
-    background-color: ${vars.color1};
+    background-color: ${vars.color2};
     color: ${vars.color7};
   }
 `;
 
 export default function Button(props) {
   return (
-    <StyledButton className={props.extraClasses} onClick={() => props.onClick()}>{props.text}</StyledButton>
+    <StyledButton className={props.extraClasses} onClick={() => props.onClick ? props.onClick() : ''}>{props.text}</StyledButton>
   );
 }

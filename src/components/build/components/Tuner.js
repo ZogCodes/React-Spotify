@@ -4,7 +4,7 @@ import vars from '../../../styles/vars';
 import Button from './Button';
 
 const StyledTuner = styled.div`
-  background-color: ${vars.color5};
+  background-color: ${vars.color4};
   padding: ${vars.normalPadding};
   grid-area: 1/1/3/2;
   opacity: 1;
