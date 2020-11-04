@@ -21,7 +21,8 @@ module.exports = {
     "quotes": 0,
     "indent": ["warn", 2],
     "arrow-parens": ["error", "as-needed"],
-    "class-methods-use-this": 0
+    "class-methods-use-this": 0,
+    "react/prop-types": 0
   },
   "parserOptions": {
     "ecmaFeatures": {
