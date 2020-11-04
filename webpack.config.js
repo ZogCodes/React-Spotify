@@ -38,7 +38,6 @@ module.exports = {
   watchOptions: {
     poll: true
   },
-  target: 'node',
   module: {
     rules: [
       {
