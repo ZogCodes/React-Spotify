@@ -8,6 +8,7 @@ const StyledAuth = styled.div`
   max-width: 60%;
   margin: 15% auto 0;
   text-align: center;
+  padding-bottom: 15%;
 
   h2 {
     font-size: 32px;

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import vars from '../../../styles/vars';
 
-const StyledIntructions = styled.div`
+const StyledInstructions = styled.div`
   background-color: ${vars.color1};
   padding: ${vars.smallPadding};
   font-size: 14px;
@@ -25,5 +25,5 @@ export default function handleInstructions(playlist) {
     instructions = '';
   }
   return (
-    <StyledIntructions>{instructions}</StyledIntructions>);
+    <StyledInstructions>{instructions}</StyledInstructions>);
 }

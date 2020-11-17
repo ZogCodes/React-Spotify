@@ -5,6 +5,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-color: $color1;
   margin: 0;
+  box-sizing: border-box;
 
   #root{
     height: 100%;

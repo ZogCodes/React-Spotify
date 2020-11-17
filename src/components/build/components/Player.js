@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 import vars from '../../../styles/vars';
 import Button from './Button';
 
@@ -15,7 +16,7 @@ const StyledPlayer = styled.div`
       box-shadow: ${vars.boxShadow};
   
       .full & {
-        width: 450px;
+        width: 400px;
       }
     }
 
@@ -77,6 +78,15 @@ const StyledPlayer = styled.div`
   p {
     margin: 0
   }
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 35%;
+    margin: 0 auto;
+  }
 `;
 
 function Player(props) {
@@ -108,8 +118,6 @@ function Player(props) {
     }
   }, [props.activeTrack]);
 
-  console.log(props.activeTrack);
-
   return (
     <StyledPlayer>
       <div className="top">
@@ -134,7 +142,14 @@ function Player(props) {
       }
       <h3>{props.activeTrack.name}</h3>
       <p>{props.activeTrack.artists[0].name}</p>
-      <Button onClick={props.addToPlaylist} text="Add to playlist" />
+      <div className="buttons">
+        <Button onClick={props.addToPlaylist} text="Add to playlist" />
+        {props.playlist.length >= 5
+          ? <Link to="/export">
+            <Button text="Export" extraClasses="export" />
+          </Link>
+          : ''}
+      </div>
     </StyledPlayer>
   );
 }

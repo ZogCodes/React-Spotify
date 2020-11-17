@@ -1,8 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
 import vars from '../../../styles/vars';
-import Button from './Button';
-import { Link } from "react-router-dom";
 
 const StyledPlaylist = styled.div`
   position: relative;
@@ -12,7 +10,7 @@ const StyledPlaylist = styled.div`
     top: 0;
     background: ${vars.color2};
     padding: 15px 25px 5px;
-    width: 100%;
+    width: calc(100% - 50px);
 
     input[name="playlist-name"] {
       margin-left: 1rem;
@@ -39,8 +37,7 @@ const StyledPlaylist = styled.div`
     list-style: none;
     padding-inline-start: 0;
     overflow: scroll;
-    height: 27vh;
-    max-height: 100%;
+    height: 300px;
     padding-top: 20px;
     margin-top: 0;
 
@@ -59,11 +56,6 @@ const StyledPlaylist = styled.div`
         padding: 5px 25px 10px;
       }
     }
-  }
-
-  [href="/export"] {
-    display: block;
-    text-align: center;
   }
 
 `;
@@ -93,11 +85,6 @@ function Playlist(props) {
         </li>
         {songs}
       </ul>
-      {props.playlist.length >= 5
-        ? <Link to="/export">
-          <Button text="Export" extraClasses="export" />
-        </Link>
-        : ''}
     </StyledPlaylist>);
 }
 

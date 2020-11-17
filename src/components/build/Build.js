@@ -2,7 +2,8 @@ import React, {useEffect, useState } from 'react';
 import Playlist from "./components/Playlist";
 import Tuner from "./components/Tuner";
 import Player from "./components/Player";
-import handleInstructions from "./components/handleInstructions";
+import Error from "./components/Error";
+import handleInstructions from "./hooks/handleInstructions";
 
 function Build(props) {
   const [activeTrack, setTrack] = useState('');
@@ -10,6 +11,7 @@ function Build(props) {
   const [activeIndex, setIndex] = useState(0);
   const [tunings, setTunings] = useState({market: 'from_token'});
   const [recTracks, setRecTracks] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const parameters = "limit=40";
@@ -72,14 +74,20 @@ function Build(props) {
         Authorization: `Bearer ${props.accessToken}`
       },
     });
-    const json = await res.json();
-    setTrack(json.tracks[0]);
-    setRecTracks(json.tracks);
+    if (res.status === 400) {
+      setError("We couldn't find any results for this tuning! Please tune again.");
+    } else {
+      setError("");
+      const json = await res.json();
+      setTrack(json.tracks[0]);
+      setRecTracks(json.tracks);
+    }
   };
 
   return (
     <>
       {handleInstructions(props.playlist)}
+      {error.length > 1 ? <Error error={error} /> : ''}
       <section>
         {(activeTrack)
           ? <>
@@ -89,7 +97,7 @@ function Build(props) {
               </>
               : '' }
             <div className={props.playlist.length === 0 ? "full" : ''}>
-              <Player activeTrack={activeTrack} nextTrack={nextTrack} addToPlaylist={addToPlaylist} />
+              <Player activeTrack={activeTrack} nextTrack={nextTrack} addToPlaylist={addToPlaylist} playlist={props.playlist}/>
             </div>
             {props.playlist.length > 0
               ? <>
