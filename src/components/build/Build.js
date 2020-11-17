@@ -84,6 +84,8 @@ function Build(props) {
     }
   };
 
+  console.log(activeTrack);
+  
   return (
     <>
       {handleInstructions(props.playlist)}

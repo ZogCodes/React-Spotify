@@ -62,7 +62,6 @@ function Tuner(props) {
     'target_instrumentalness',
     'target_loudness',
     'target_popularity',
-    'target_tempo',
     'target_valence'
   ];
 

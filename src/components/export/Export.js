@@ -104,7 +104,6 @@ function Export(props) {
     <span className="song-artist">{el.artists[0].name}</span>
     <span className="song-album">{el.album.name}</span>
   </li>);
-  console.log(songs)
 
   return (
     <StyledExport>
@@ -116,7 +115,7 @@ function Export(props) {
         </ul>
       </div>
       <div className="analysis">
-        <Analysis />
+        <Analysis playlist={props.playlist} accessToken={props.accessToken}/>
       </div>
     </StyledExport>
   );

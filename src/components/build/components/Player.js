@@ -91,7 +91,7 @@ const StyledPlayer = styled.div`
 
 function Player(props) {
   const [playerState, setPlayerState] = useState({
-    playing: true,
+    playing: false,
     playerIcon: <i className="fas fa-pause-circle" onClick={() => handlePlayer()}></i>
   });
 
