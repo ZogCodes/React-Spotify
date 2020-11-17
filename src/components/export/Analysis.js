@@ -28,20 +28,20 @@ export default function Analysis(props) {
       };
 
       json.audio_features.map(el => {
-        attributes.acousticness = (attributes.acousticness + el.acousticness);
-        attributes.danceability = (attributes.danceability + el.danceability);
-        attributes.energy = (attributes.energy + el.energy);
-        attributes.instrumentalness = (attributes.instrumentalness + el.instrumentalness);
-        attributes.loudness = (attributes.loudness + el.loudness);
-        attributes.valence = (attributes.valence + el.valence);
+        attributes.acousticness += el.acousticness;
+        attributes.danceability += el.danceability;
+        attributes.energy += el.energy;
+        attributes.instrumentalness += el.instrumentalness;
+        attributes.loudness += el.loudness;
+        attributes.valence += el.valence;
       });
 
-      attributes.acousticness = attributes.acousticness/props.playlist.length;
-      attributes.danceability = attributes.danceability/props.playlist.length;
-      attributes.energy = attributes.energy/props.playlist.length;
-      attributes.instrumentalness = attributes.instrumentalness/props.playlist.length;
-      attributes.loudness = attributes.loudness/props.playlist.length;
-      attributes.valence = attributes.valence/props.playlist.length;
+      attributes.acousticness /= props.playlist.length;
+      attributes.danceability /= props.playlist.length;
+      attributes.energy /= props.playlist.length;
+      attributes.instrumentalness /= props.playlist.length;
+      attributes.loudness /= props.playlist.length;
+      attributes.valence /= props.playlist.length;
 
       setAnalysis(attributes);
     };
