@@ -8,6 +8,7 @@ const StyledExport = styled.section`
   margin: 0 auto;
   grid-template: 1fr/1fr 1fr !important;
   margin-top: 3rem;
+  padding-bottom: 5rem;
 
   .exporting {
     text-align: center;
