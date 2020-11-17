@@ -24,7 +24,6 @@ export default function Analysis(props) {
         energy: 0,
         instrumentalness: 0,
         loudness: 0,
-        tempo: 0,
         valence: 0
       };
 
