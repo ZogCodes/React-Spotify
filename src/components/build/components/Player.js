@@ -91,7 +91,7 @@ const StyledPlayer = styled.div`
 
 function Player(props) {
   const [playerState, setPlayerState] = useState({
-    playing: false,
+    playing: true,
     playerIcon: <i className="fas fa-pause-circle" onClick={() => handlePlayer()}></i>
   });
 
@@ -110,13 +110,26 @@ function Player(props) {
   };
 
   useEffect(() => {
-    if (props.activeTrack.preview_url) {
+    if (props.activeTrack.preview_url && playerState.playing) {
       player.current.src = props.activeTrack.preview_url;
       setPlayerState({ ...playerState, playing: true, playerIcon: <i className="fas fa-pause-circle" onClick={() => handlePlayer()}></i>});
+    } else if (props.activeTrack.preview_url && !playerState.playing) {
+      player.current.src = props.activeTrack.preview_url;
+      setPlayerState({ ...playerState, playing: false, playerIcon: <i className="fas fa-play-circle" onClick={() => handlePlayer()}></i>});
     } else {
       setPlayerState({ ...playerState, playing: false, playerIcon: ''});
     }
   }, [props.activeTrack]);
+
+  const audio = (state, src) => {
+    let content = '';
+    if (state && src) {
+      content = <audio ref={player} autoPlay><source src={src} type="audio/ogg" /></audio>
+    } else if (src) {
+      content = <audio ref={player}><source src={src} type="audio/ogg" /></audio>
+    }
+    return content;
+  };
 
   return (
     <StyledPlayer>
@@ -135,9 +148,7 @@ function Player(props) {
         </div>
       </div>
       { props.activeTrack.preview_url
-        ? <audio ref={player} autoPlay>
-          <source src={props.activeTrack.preview_url} type="audio/ogg" />
-        </audio>
+        ? audio(playerState.playing, props.activeTrack.preview_url)
         : ''
       }
       <h3>{props.activeTrack.name}</h3>
